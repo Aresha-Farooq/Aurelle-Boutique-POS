@@ -1,0 +1,58 @@
+const tailorTasksData = [
+  {
+    id: "T001",
+    task: "Cut fabric for bridal lehenga",
+    orderId: "#1001",
+    customer: "Ayesha Khan",
+    dueDate: "2026-07-15",
+    priority: "High",
+    status: "In Progress",
+  },
+  {
+    id: "T002",
+    task: "Stitch silk maxi body",
+    orderId: "#1002",
+    customer: "Fatima Ali",
+    dueDate: "2026-07-16",
+    priority: "Medium",
+    status: "Pending",
+  },
+  {
+    id: "T003",
+    task: "Attach embroidery to blouse",
+    orderId: "#1005",
+    customer: "Zara Malik",
+    dueDate: "2026-07-14",
+    priority: "High",
+    status: "Overdue",
+  },
+  {
+    id: "T004",
+    task: "Final fitting for 3 piece suit",
+    orderId: "#1003",
+    customer: "Sana Ahmed",
+    dueDate: "2026-07-15",
+    priority: "Low",
+    status: "Completed",
+  },
+  {
+    id: "T005",
+    task: "Hemming party frock",
+    orderId: "#1004",
+    customer: "Hira Noor",
+    dueDate: "2026-07-17",
+    priority: "Medium",
+    status: "Pending",
+  },
+  {
+    id: "T006",
+    task: "Iron and pack abaya",
+    orderId: "#1006",
+    customer: "Noor Fatima",
+    dueDate: "2026-07-15",
+    priority: "Low",
+    status: "In Progress",
+  },
+];
+
+export default tailorTasksData;

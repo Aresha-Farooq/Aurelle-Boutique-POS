@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-soft-pink: #d0ada7;
+  --color-warm-beige: #bf8c8a;
+  --color-cream: #e8d6cb;
+  --color-dusty-rose: #ad6a6c;
+  --color-green: #5f7470;
+  --color-skin: #b8bdb5;
+  --color-lightSkin:#e9ece7;
+}
