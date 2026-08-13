@@ -102,24 +102,26 @@ const Inventory = () => {
       />
     </div>
 
-    <div className="flex flex-col gap-1">
-      <label className="font-semibold text-green">Size</label>
+  <div className="flex flex-col gap-1">
+  <label className="font-semibold text-green">Size</label>
 
-      <div className="flex gap-2 flex-wrap">
-        {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
-          <label
-            key={size}
-            className="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-2 cursor-pointer hover:border-green hover:bg-green/10"
-          >
-            <input
-              type="checkbox"
-              className="accent-green w-4 h-4"
-            />
-            {size}
-          </label>
-        ))}
-      </div>
-    </div>
+  <div className="flex gap-2 flex-wrap">
+    {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+      <label
+        key={size}
+        className="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-2 cursor-pointer hover:border-green hover:bg-green/10"
+      >
+        <input
+          type="radio"
+          name="size"
+          value={size}
+          className="accent-green w-4 h-4"
+        />
+        {size}
+      </label>
+    ))}
+  </div>
+</div>
 
     <div className="flex flex-col gap-1">
       <label className="font-semibold text-green">Color</label>
