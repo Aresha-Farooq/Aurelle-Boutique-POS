@@ -11,18 +11,8 @@ const getSalesChart = async (req, res) => {
         process.env.JWT_SECRET
     );
 
-    console.log("========== JWT DEBUG ==========");
-console.log("Decoded:", decoded);
-console.log("User ID:", decoded.id);
-console.log("Role:", decoded.role);
-console.log("Role type:", typeof decoded.role);
-console.log("================================");
-
     const user_id = decoded.id;
     const role = decoded.role;
-
-    console.log("Decoded:", decoded);
-console.log("Role:", role);
 
     if (role !== "owner") {
         return res.status(403).json({

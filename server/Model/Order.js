@@ -34,6 +34,11 @@ assignedTailor: {
       required: true,
       default: Date.now,
     },
+    completedAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
 
     deliveryDate: {
       type: Date,
@@ -57,7 +62,7 @@ assignedTailor: {
 
     status: {
       type: String,
-      enum: ["Pending", "Completed"],
+      enum: ["Pending", "Completed", "In Stitching"],
       default: "Pending",
     },
 
