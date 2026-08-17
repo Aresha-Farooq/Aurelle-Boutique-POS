@@ -9,53 +9,9 @@ const orderOperations = async (req, res) => {
         // 1. TOKEN CHECK
         // =========================
 
-        const token = req.headers.authorization.split(" ")[1];
+    
 
-        const decoded = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        );
-
-        const user_id = decoded.id;
-        const role = decoded.role;
-
-
-        // =========================
-        // 2. ROLE CHECK
-        // =========================
-
-        if (role !== "owner") {
-            return res.status(403).json({
-                success: false,
-                message: "Access denied"
-            });
-        }
-
-
-        // =========================
-        // 3. USER ID CHECK
-        // =========================
-
-        if (!user_id) {
-            return res.status(404).json({
-                success: false,
-                message: "Null Id"
-            });
-        }
-
-
-        // =========================
-        // 4. USER CHECK
-        // =========================
-
-        const user = await User.findById(user_id);
-
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "User not found"
-            });
-        }
+        const user_id = req.user.id;
 
 
         // =========================

@@ -5,6 +5,8 @@ const authRoute = require("./Routes/authRoute");
 const orderRoute=require("./Routes/orderRoutes");
 const salesRoute=require("./Routes/salesRoute");
 const productRoutes=require("./Routes/productRoutes");  
+const tailorRoutes=require("./Routes/tailorRoute");
+const CustomerRoutes=require("./Routes/customerRoute");
 const app=express();
 const port=3000;
 app.use(express.json());
@@ -12,6 +14,8 @@ app.use("/auth", authRoute);
 app.use("/api", orderRoute);
 app.use("/api", productRoutes);
 app.use("/api", salesRoute);
+app.use("/api", CustomerRoutes);
+app.use("/api", tailorRoutes);
 mongoose.connect(process.env.DATABASE_URL).then(()=>{
     console.log("Successfully Connected!");
 }).catch((err)=>{

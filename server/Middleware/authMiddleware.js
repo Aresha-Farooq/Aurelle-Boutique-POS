@@ -1,33 +1,76 @@
 const jwt = require("jsonwebtoken");
-const authMiddleware = (req, res, next) => {
+const User = require("../Model/User");
+
+const authMiddleware = async (req, res, next) => {
+
     try {
-        // Authorization header se token lena
+
+        // 1. Authorization header
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
             return res.status(401).json({
                 success: false,
-                message: "Token not found"
+                message: "Token required"
             });
         }
-    
-        // "Bearer token" me se sirf token nikalna
+
+
+        // 2. Token nikalo
         const token = authHeader.split(" ")[1];
 
-        // Token verify karna
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid token format"
+            });
+        }
 
-        // Decoded data request me save karna
-        req.user = decoded;
 
-        // Agle middleware/controller par jana
+        // 3. JWT verify
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
+
+
+        // 4. Token mein ID hai ya nahi
+        if (!decoded.id) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid user ID"
+            });
+        }
+
+
+        // 5. Database mein user check
+        const user = await User.findById(decoded.id);
+
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "User no longer exists"
+            });
+        }
+
+
+        // 6. User information request mein save
+        req.user = {
+            id: user._id,
+            role: user.role
+        };
+
+
+        // 7. Next middleware/controller
         next();
-    } catch (err) {
+
+    } catch (error) {
 
         return res.status(401).json({
             success: false,
-            message: "Invalid Token"
+            message: "Invalid or expired token"
         });
     }
 };
+
 module.exports = authMiddleware;
