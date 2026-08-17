@@ -8,6 +8,7 @@ router.use(
     authMiddleware,
     roleMiddleware("owner")
 );
+
 router.post("/sales", createSale);
 router.get("/salesChart",getSalesChart);
 module.exports = router;
