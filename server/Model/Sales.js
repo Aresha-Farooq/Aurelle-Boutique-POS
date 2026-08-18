@@ -15,7 +15,7 @@ const saleSchema = new mongoose.Schema(
 
     paymentMethod: {
       type: String,
-      enum: ["Cash", "Card", "Online"],
+      enum: ["Cash", "Card","EasyPaisa", "JazzCash"],
       required: true,
     },
 
