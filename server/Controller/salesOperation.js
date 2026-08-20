@@ -559,45 +559,59 @@ const salesOperations = async (req, res) => {
 
         const { search } = req.query;
 
-        let sales = AllItems;
+let sales = AllItems;
 
-        if (search && search.trim() !== "") {
+if (search && search.trim() !== "") {
 
-            const searchValue = search.trim();
+    const searchValue = search.trim();
 
-            const searchCondition = [
-                {
-                    customer: {
-                        $regex: searchValue,
-                        $options: "i"
-                    }
-                },
-                {
-                    product: {
-                        $regex: searchValue,
-                        $options: "i"
-                    }
-                }
-            ];
-
-
-            // If search is a number,
-            // search amount also
-
-            if (!isNaN(searchValue)) {
-
-                searchCondition.push({
-                    amount: Number(searchValue)
-                });
-
+    const searchCondition = [
+        {
+            customer: {
+                $regex: searchValue,
+                $options: "i"
             }
-
-
-            sales = await Sales.find({
-                $or: searchCondition
-            });
-
+        },
+        {
+            product: {
+                $regex: searchValue,
+                $options: "i"
+            }
         }
+    ];
+
+    // Amount search
+    if (!isNaN(searchValue)) {
+
+        searchCondition.push({
+            amount: Number(searchValue)
+        });
+
+    }
+
+    // Date search
+    const searchDate = new Date(searchValue);
+
+    if (!isNaN(searchDate.getTime())) {
+
+        const startOfDay = new Date(searchDate);
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(searchDate);
+        endOfDay.setHours(23, 59, 59, 999);
+
+        searchCondition.push({
+            createdAt: {
+                $gte: startOfDay,
+                $lte: endOfDay
+            }
+        });
+    }
+
+    sales = await Sales.find({
+        $or: searchCondition
+    });
+}
 
 
         // =====================================================
